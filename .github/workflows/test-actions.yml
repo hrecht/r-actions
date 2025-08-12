@@ -30,8 +30,8 @@ jobs:
 
       - name: Do math with variables
         run: |
-          echo "Adding numbers:" ${{env.NUMERIC_TEST}} + ${{env.NUMERIC_TEST}}
-          echo "Adding various:" ${{env.NUMERIC_TEST}} + ${{env.BOOLEAN_TEST}}
+          echo "Adding numbers:" ${{env.NUMERIC_TEST + env.NUMERIC_TEST}}
+          echo "Adding various:" ${{env.NUMERIC_TEST + 7 }}
           
       - name: Pass data to output for use in following jobs
         id: pass_data
