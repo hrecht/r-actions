@@ -11,6 +11,7 @@ jobs:
       BOOLEAN_TEST: ${{ steps.passvars.outputs.BOOLEAN_TEST}}
       NUMERIC_TEST: ${{ steps.passvars.outputs.NUMERIC_TEST}}
     steps:
+      - uses: actions/checkout@v4
     
       # Install R and dependencies
       - uses: r-lib/actions/setup-r@v2
