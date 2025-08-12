@@ -7,9 +7,9 @@ jobs:
   test_data:
     runs-on: ubuntu-latest
     outputs:
-      TEXT_TEST: ${{ steps.passvars.outputs.TEXT_TEST}}
-      BOOLEAN_TEST: ${{ steps.passvars.outputs.BOOLEAN_TEST}}
-      NUMERIC_TEST: ${{ steps.passvars.outputs.NUMERIC_TEST}}
+      TEXT_TEST: ${{ steps.pass_data.outputs.TEXT_TEST}}
+      BOOLEAN_TEST: ${{ steps.pass_data.outputs.BOOLEAN_TEST}}
+      NUMERIC_TEST: ${{ steps.pass_data.outputs.NUMERIC_TEST}}
     steps:
       - uses: actions/checkout@v4
     
