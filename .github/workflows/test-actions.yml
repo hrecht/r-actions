@@ -38,7 +38,7 @@ jobs:
   # Echo data
   repeat_data:
     runs-on: ubuntu-latest
-    needs: pass_data
+    needs: test_data
     steps:
         - name: Echo passed vars
           run: |
