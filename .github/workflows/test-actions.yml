@@ -41,7 +41,7 @@ jobs:
           echo "NUMERIC_TEST=${{env.NUMERIC_TEST}}" >> $GITHUB_OUTPUT
 
       - name: Test conditionals
-        if: ${{ env.BOOLEAN_TEST == TRUE }} 
+        if: ${{ env.BOOLEAN_TEST == 'TRUE' }} 
         run: |
           echo "Boolean is TRUE"
 
