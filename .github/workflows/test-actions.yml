@@ -27,6 +27,11 @@ jobs:
           echo "Text: ${{env.TEXT_TEST}}"
           echo "Boolean: ${{env.BOOLEAN_TEST}}"
           echo "Numeric: ${{env.NUMERIC_TEST}}"
+
+      - name: Do math with variables
+        run: |
+          echo "Adding numbers:" ${{env.NUMERIC_TEST}} + ${{env.NUMERIC_TEST}}
+          echo "Adding various:" ${{env.NUMERIC_TEST}} + ${{env.BOOLEAN_TEST}}
           
       - name: Pass data to output for use in following jobs
         id: pass_data
@@ -34,7 +39,16 @@ jobs:
           echo "TEXT_TEST=${{env.TEXT_TEST}}" >> $GITHUB_OUTPUT
           echo "BOOLEAN_TEST=${{env.BOOLEAN_TEST}}" >> $GITHUB_OUTPUT
           echo "NUMERIC_TEST=${{env.NUMERIC_TEST}}" >> $GITHUB_OUTPUT
-          
+
+      - name: Test conditionals
+        if: ${{ env.BOOLEAN_TEST == TRUE }} 
+        run: |
+          echo "Boolean is TRUE"
+
+      - name: Test numeric conditional
+        if: ${{ env.NUMERIC_TEST > 1 }} 
+        run: |
+          echo "Numeric is > 1"
 
   # Echo data
   repeat_data:
