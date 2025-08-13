@@ -30,8 +30,10 @@ jobs:
           echo Boolean: $BOOLEAN_TEST
           echo Numeric: $NUMERIC_TEST
           echo Date: $DATE_TEST
-          echo "BOOLEAN_LOCAL=false" >> "$GITHUB_ENV"
-          echo BOOLEAN_LOCAL2=false >> "$GITHUB_ENV"
+          echo Arbitrary test: $ARB_TEST
+          echo List test: $LIST_TEST
+          echo Json List test: ${{ fromJSON(env.LIST_TEST) }}
+          echo "BOOLEAN_LOCAL=FALSE" >> "$GITHUB_ENV"
   
       - name: Do math with variables
         run: |
@@ -42,15 +44,15 @@ jobs:
         run: |
           echo "Boolean local is false string"
           
-      - name: Test boolean local2 false
-        if: ${{ env.BOOLEAN_LOCAL2 == 'false' }} 
+      - name: Test boolean local FALSE
+        if: ${{ env.BOOLEAN_LOCAL == 'FALSE' }} 
         run: |
-          echo "Boolean local2 is false string"
+          echo "Boolean local is FALSE string"
           
-      - name: Test boolean true string
-        if: ${{ env.BOOLEAN_TEST == 'true' }} 
+      - name: Test boolean FALSE string
+        if: ${{ env.BOOLEAN_TEST == 'FALSE' }} 
         run: |
-          echo "Boolean is true string"
+          echo "Boolean is FALSE string"
           
       - name: Test boolean false string
         if: ${{ env.BOOLEAN_TEST == 'false' }} 
