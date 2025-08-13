@@ -30,25 +30,15 @@ jobs:
           echo "Boolean:" $BOOLEAN_TEST
           echo "Numeric:" $NUMERIC_TEST
           echo "Date:" $DATE_TEST
-          echo "BOOLEAN_LOCAL=false" >> "$GITHUB_ENV"
 
       - name: Print complex variables
         run: |
           echo "Arbitrary test:" $ARB_TEST
+          echo "List test:" $LIST_TEST
 
       - name: Do math with variables
         run: |
           echo "Adding numbers:" $((NUMERIC_TEST + NUMERIC_TEST + 9))
-
-      - name: Test boolean local false
-        if: ${{ env.BOOLEAN_LOCAL == 'false' }} 
-        run: |
-          echo "Boolean local is false string"
-          
-      - name: Test boolean local FALSE
-        if: ${{ env.BOOLEAN_LOCAL == 'FALSE' }} 
-        run: |
-          echo "Boolean local is FALSE string"
           
       - name: Test boolean FALSE string
         if: ${{ env.BOOLEAN_TEST == 'FALSE' }} 
@@ -59,6 +49,11 @@ jobs:
         if: ${{ env.BOOLEAN_TEST == 'false' }} 
         run: |
           echo "Boolean is false string"
+          
+      - name: Test boolean hello string
+        if: ${{ env.BOOLEAN_TEST == 'Hello' }} 
+        run: |
+          echo "Boolean is Hello
 
       - name: Test numeric conditional less than
         if: ${{ env.NUMERIC_TEST < 10 }} 
