@@ -34,18 +34,17 @@ jobs:
       - name: Do math with variables
         run: |
           echo Adding numbers: $(($NUMERIC_TEST + $NUMERIC_TEST + 9))
-          echo Adding vars: $(($NUMERIC_TEST + $BOOLEAN_TEST))
           
       - name: Pass data to output for use in following jobs
         id: pass_data
         run: |
           echo "BOOLEAN_TEST=$BOOLEAN_TEST" >> $GITHUB_OUTPUT
-          echo "NUMERIC_TEST=$NUMERIC_TEST" >> $GITHUB_OUTPUT
+          echo "NUMERIC_TEST=5" >> $GITHUB_OUTPUT
 
-      - name: Test boolean true
-        if: ${{ env.BOOLEAN_TEST == true }} 
+      - name: Test boolean false
+        if: ${{ env.BOOLEAN_TEST == false }} 
         run: |
-          echo "Boolean is true"
+          echo "Boolean is false"
           
       - name: Test boolean true string
         if: ${{ env.BOOLEAN_TEST == 'true' }} 

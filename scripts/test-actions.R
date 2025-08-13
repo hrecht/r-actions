@@ -22,7 +22,7 @@ send_env <- function(var_name,
 	# Should look like
 	#system(echo "STRING_TEST=${{env.STRING_TEST}}" >> $GITHUB_OUTPUT)
 	if (send_output == TRUE) {
-		output_part <- paste0(var_name, "=$", var_name, ' >> "$GITHUB_OUTPUT"')
+		output_part <- paste0(var_name, "=", var_value, ' >> "$GITHUB_OUTPUT"')
 		print(output_part)
 		system(paste('echo', output_part))
 	}
@@ -32,3 +32,6 @@ send_env("STRING_TEST", "Hello world", send_output = TRUE)
 send_env("BOOLEAN_TEST", FALSE)
 send_env("NUMERIC_TEST", 5)
 send_env("DATE_TEST", Sys.time())
+
+# Try getting from the env
+Sys.getenv("github.repository")
