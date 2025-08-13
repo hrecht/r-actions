@@ -23,18 +23,21 @@ jobs:
           echo github.repository="${{github.repository}}" >> ~/.Renviron
           Rscript scripts/test-actions.R
 
-      - name: Print variables
+      - name: Print simple variables
         id: print_vars
         run: |
           echo "String:" $STRING_TEST
           echo "Boolean:" $BOOLEAN_TEST
           echo "Numeric:" $NUMERIC_TEST
           echo "Date:" $DATE_TEST
+          echo "BOOLEAN_LOCAL=false" >> "$GITHUB_ENV"
+
+      - name: Print complex variables
+        run: |
           echo "Arbitrary test:" $ARB_TEST
           # echo "List test: ${{ env.LIST_TEST }}"
           # echo "Json List test: ${{ fromJSON(env.LIST_TEST) }}"
-          echo "BOOLEAN_LOCAL=FALSE" >> "$GITHUB_ENV"
-  
+
       - name: Do math with variables
         run: |
           echo "Adding numbers:" $((NUMERIC_TEST + NUMERIC_TEST + 9))
