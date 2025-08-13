@@ -20,6 +20,7 @@ jobs:
       - name: Run test-actions.R
         id: rscript
         run: |
+        	echo github/repository="${{github.repository}}" >> ~/.Renviron
           Rscript scripts/test-actions.R
 
       - name: Print variables
@@ -29,15 +30,22 @@ jobs:
           echo Boolean: $BOOLEAN_TEST
           echo Numeric: $NUMERIC_TEST
           echo Date: $DATE_TEST
+          echo "BOOLEAN_LOCAL=false" >> "$GITHUB_ENV"
+          echo BOOLEAN_LOCAL2=false >> "$GITHUB_ENV"
   
       - name: Do math with variables
         run: |
           echo Adding numbers: $(($NUMERIC_TEST + $NUMERIC_TEST + 9))
 
-      - name: Test boolean false
-        if: ${{ env.BOOLEAN_TEST == false }} 
+      - name: Test boolean local false
+        if: ${{ env.BOOLEAN_LOCAL == false }} 
         run: |
-          echo "Boolean is false"
+          echo "Boolean local is false"
+          
+      - name: Test boolean local2 false
+        if: ${{ env.BOOLEAN_LOCAL2 == false }} 
+        run: |
+          echo "Boolean local2 is false"
           
       - name: Test boolean true string
         if: ${{ env.BOOLEAN_TEST == 'true' }} 
@@ -66,6 +74,6 @@ jobs:
     steps:
         - name: Echo passed vars
           run: |
-            echo "Repeating string: ${{ needs.test_data.outputs.STRING_TEST }}"
-            echo "Repeating boolean: ${{ needs.test_data.outputs.BOOLEAN_TEST }}"
-            echo "Repeating numeric: ${{ needs.test_data.outputs.NUMERIC_TEST }}"
+            echo "Repeating string:" ${{ needs.test_data.outputs.STRING_TEST }}
+            echo "Repeating boolean:" ${{ needs.test_data.outputs.BOOLEAN_TEST }}
+            echo "Repeating numeric:" ${{ needs.test_data.outputs.NUMERIC_TEST }}
