@@ -35,7 +35,7 @@ jobs:
         run: |
           echo "Arbitrary test:" $ARB_TEST
           echo "List test + fromJSON:" ${{ fromJSON(env.LIST_TEST) }}
-          echo "Multiline test:" ${{ env.MULTILINE_TEST) }}
+          echo "Multiline test:" ${{ env.MULTILINE_TEST }}
 
       - name: Do math with variables
         run: |
