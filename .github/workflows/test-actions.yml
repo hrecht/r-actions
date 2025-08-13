@@ -20,7 +20,7 @@ jobs:
       - name: Run test-actions.R
         id: rscript
         run: |
-        	echo github/repository="${{github.repository}}" >> ~/.Renviron
+        	echo github_repository="${{github.repository}}" >> ~/.Renviron
           Rscript scripts/test-actions.R
 
       - name: Print variables

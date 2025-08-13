@@ -41,5 +41,5 @@ send_env("NUMERIC_TEST", 5, send_output = TRUE)
 send_env("DATE_TEST", Sys.time())
 
 # Try getting from the env
-repo <- Sys.getenv("github.repository")
+repo <- Sys.getenv("github_repository")
 print(repo)
