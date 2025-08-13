@@ -27,6 +27,7 @@ jobs:
           echo "Text: ${{env.TEXT_TEST}}"
           echo "Boolean: ${{env.BOOLEAN_TEST}}"
           echo "Numeric: ${{env.NUMERIC_TEST}}"
+          echo "Date: ${{env.DATE_TEST}}"
 
       - name: Do math with variables
         run: |
