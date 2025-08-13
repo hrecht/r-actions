@@ -51,7 +51,7 @@ jobs:
           
       - name: Print multiline
         run: |
-          echo "Multiline:" ${{env.MULTI_TEST}}
+          echo "Multiline: ${{ env.MULTI_TEST }}"
 
       - name: Do math with variables
         run: |
