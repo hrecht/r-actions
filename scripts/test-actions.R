@@ -33,14 +33,4 @@ send_env("LIST_TEST", var_value = '["foo", "bar"]')
 repo <- Sys.getenv("github.repository")
 print(repo)
 
-system('echo
-			 MULTILINE_TEST=$(cat << EOF
-			 					 Line 1
-			 					 Line 2
-			 					 Line 3
-			 					 EOF
-			 )
-			 echo "MULTILINE_TEST<<EOF" >> $GITHUB_ENV
-			 echo "$MULTILINE_TEST" >> $GITHUB_ENV
-			 echo "EOF" >> $GITHUB_ENV')
 

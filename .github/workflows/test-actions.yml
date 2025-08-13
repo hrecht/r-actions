@@ -35,7 +35,23 @@ jobs:
         run: |
           echo "Arbitrary test:" $ARB_TEST
           echo "List test + fromJSON:" ${{ fromJSON(env.LIST_TEST) }}
-          echo "Multiline test:" ${{ env.MULTILINE_TEST }}
+          
+      - name: Set multiline variable
+        run: |
+          echo
+          MULTI_TEST=$(cat << EOF
+          Line 1
+          Line 2
+          Line 3
+          EOF
+          )
+          echo "MULTI_TEST<<EOF" >> $GITHUB_ENV
+          echo "$MULTI_TEST" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+          
+      - name: Print multiline
+        run: |
+          echo "Multiline:" ${{env.MULTI_TEST}}
 
       - name: Do math with variables
         run: |
