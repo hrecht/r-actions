@@ -23,9 +23,9 @@ send_env <- function(var_name,
 	#system(echo "STRING_TEST=${{env.STRING_TEST}}" >> $GITHUB_OUTPUT)
 	if (send_output == TRUE) {
 		if (convert_boolean == TRUE & var_value == TRUE ) {
-			ouput_part <- paste0(var_name, '=true', ' >> "$GITHUB_OUTPUT"')
+			ouput_part <- paste0('"', var_name, '=true"', ' >> "$GITHUB_OUTPUT"')
 		}	else if (convert_boolean == TRUE & var_value == FALSE) {
-			output_part <- paste0(var_name, '=false', ' >> "$GITHUB_OUPUT"')
+			output_part <- paste0('"', var_name, '=false"', ' >> "$GITHUB_OUTPUT"')
 		} else {
 			output_part <- paste0('"', var_name, "=", var_value, '"', ' >> "$GITHUB_OUTPUT"')
 		}
