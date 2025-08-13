@@ -25,20 +25,21 @@ jobs:
       - name: Print variables
         id: print_vars
         run: |
-          echo "String: ${{env.STRING_TEST}}"
-          echo "Boolean: ${{env.BOOLEAN_TEST}}"
-          echo "Numeric: ${{env.NUMERIC_TEST}}"
-          echo "Date: ${{env.DATE_TEST}}"
+          echo String: $STRING_TEST
+          echo Boolean: $BOOLEAN_TEST
+          echo Numeric: $NUMERIC_TEST
+          echo Date: $DATE_TEST
+          echo github.repository
 
       - name: Do math with variables
         run: |
-          echo "Adding numbers:" $((${{env.NUMERIC_TEST}} + ${{env.NUMERIC_TEST}} + 9))
-          echo "Adding vars:" $((${{env.NUMERIC_TEST}} + ${{env.BOOLEAN_TEST}}))
+          echo Adding numbers: $(($NUMERIC_TEST + $NUMERIC_TEST + 9))
+          echo Adding vars: $((${{env.NUMERIC_TEST}} + ${{env.BOOLEAN_TEST}}))
           
       - name: Pass data to output for use in following jobs
         id: pass_data
         run: |
-          echo "BOOLEAN_TEST=${{env.BOOLEAN_TEST}}" >> $GITHUB_OUTPUT
+          echo "BOOLEAN_TEST=$BOOLEAN_TEST" >> $GITHUB_OUTPUT
           echo "NUMERIC_TEST=${{env.NUMERIC_TEST}}" >> $GITHUB_OUTPUT
 
       - name: Test boolean true
@@ -46,17 +47,17 @@ jobs:
         run: |
           echo "Boolean is true"
           
-      - name: Test boolean false
-        if: ${{ env.BOOLEAN_TEST == false }} 
+      - name: Test boolean true string
+        if: ${{ env.BOOLEAN_TEST == 'true' }} 
         run: |
-          echo "Boolean is false"
+          echo "Boolean is true string"
 
-      - name: Test numeric conditional
-        if: ${{ env.NUMERIC_TEST > 1 }} 
+      - name: Test numeric conditional less than
+        if: ${{ env.NUMERIC_TEST < 10 }} 
         run: |
-          echo "Numeric is > 1"
+          echo "Numeric is < 10"
           
-      - name: Test numeric conditional 2
+      - name: Test numeric conditional greater than
         if: ${{ env.NUMERIC_TEST > 10 }} 
         run: |
           echo "Numeric is > 10"

@@ -6,25 +6,23 @@ send_env <- function(var_name,
 										 var_value,
 										 convert_boolean = TRUE,
 										 send_output = FALSE) {
-	post_part <- paste0(var_name, "=", var_value, ' >> "$GITHUB_ENV"')
-	
 	# Convert R booleans to bash booleans
-	if (convert_boolean == TRUE) {
-		if (var_value == TRUE) {
-			post_part <- paste0(var_name, '=true >> "$GITHUB_ENV"')
-		}	else if (var_value == FALSE) {
-			post_part <- paste0(var_name, '=false >> "$GITHUB_ENV"')
-		}
+	if (convert_boolean == TRUE & var_value == TRUE ) {
+		env_part <- paste0(var_name, '=true >> "$GITHUB_ENV"')
+	}	else if (convert_boolean == TRUE & var_value == FALSE) {
+		env_part <- paste0(var_name, '=false >> "$GITHUB_ENV"')
+	}else {
+		env_part <- paste0(var_name, "=", var_value, ' >> "$GITHUB_ENV"')
 	}
 	
-	print(post_part)
-	system(paste('echo', post_part))
+	print(env_part)
+	system(paste('echo', env_part))
 	
 	# Save to Github output for use in future jobs
 	# Should look like
 	#system(echo "STRING_TEST=${{env.STRING_TEST}}" >> $GITHUB_OUTPUT)
 	if (send_output == TRUE) {
-		output_part <- paste0('"', var_name, "=${{env.", var_name, '}}" >> "$GITHUB_OUTPUT"')
+		output_part <- paste0(var_name, "='${{env.", var_name, "}}'", ' >> "$GITHUB_OUTPUT"')
 		print(output_part)
 		system(paste('echo', output_part))
 	}
@@ -32,5 +30,5 @@ send_env <- function(var_name,
 
 send_env("STRING_TEST", "Hello world", send_output = TRUE)
 send_env("BOOLEAN_TEST", TRUE)
-send_env("NUMERIC_TEST", 2)
+send_env("NUMERIC_TEST", 5)
 send_env("DATE_TEST", Sys.time())
