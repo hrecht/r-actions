@@ -35,8 +35,6 @@ jobs:
       - name: Print complex variables
         run: |
           echo "Arbitrary test:" $ARB_TEST
-          # echo "List test: ${{ env.LIST_TEST }}"
-          # echo "Json List test: ${{ fromJSON(env.LIST_TEST) }}"
 
       - name: Do math with variables
         run: |
