@@ -36,10 +36,10 @@ send_env <- function(var_name,
 }
 
 send_env("STRING_TEST", "Hello world", send_output = TRUE)
-send_env("BOOLEAN_TEST", FALSE, send_output = TRUE)
+send_env("BOOLEAN_TEST", FALSE, convert_boolean = FALSE, send_output = TRUE)
 send_env("NUMERIC_TEST", 5, send_output = TRUE)
 send_env("DATE_TEST", Sys.time())
 
 # Try getting from the env
-repo <- Sys.getenv("github_repository")
+repo <- Sys.getenv("github.repository")
 print(repo)

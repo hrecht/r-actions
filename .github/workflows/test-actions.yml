@@ -20,7 +20,7 @@ jobs:
       - name: Run test-actions.R
         id: rscript
         run: |
-          echo github_repository="${{github.repository}}" >> ~/.Renviron
+          echo github.repository="${{github.repository}}" >> ~/.Renviron
           Rscript scripts/test-actions.R
 
       - name: Print variables
@@ -38,14 +38,14 @@ jobs:
           echo Adding numbers: $(($NUMERIC_TEST + $NUMERIC_TEST + 9))
 
       - name: Test boolean local false
-        if: ${{ env.BOOLEAN_LOCAL == false }} 
+        if: ${{ env.BOOLEAN_LOCAL == 'false' }} 
         run: |
-          echo "Boolean local is false"
+          echo "Boolean local is false string"
           
       - name: Test boolean local2 false
-        if: ${{ env.BOOLEAN_LOCAL2 == false }} 
+        if: ${{ env.BOOLEAN_LOCAL2 == 'false' }} 
         run: |
-          echo "Boolean local2 is false"
+          echo "Boolean local2 is false string"
           
       - name: Test boolean true string
         if: ${{ env.BOOLEAN_TEST == 'true' }} 
