@@ -34,19 +34,19 @@ jobs:
       - name: Print complex variables
         run: |
           echo "Arbitrary test:" $ARB_TEST
-          echo "List test:" $LIST_TEST
-          echo "List test2:" $LIST_TEST2
+          echo "List test + fromJSON:" ${{ fromJSON(env.LIST_TEST) }}
+          echo "Multiline test:" ${{ env.MULTILINE_TEST) }}
 
       - name: Do math with variables
         run: |
           echo "Adding numbers:" $((NUMERIC_TEST + NUMERIC_TEST + 9))
           
-      - name: Test boolean true string
+      - name: Test boolean true
         if: ${{ env.BOOLEAN_TEST == 'true' }} 
         run: |
           echo "Boolean is true"
           
-      - name: Test boolean false string
+      - name: Test boolean false
         if: ${{ env.BOOLEAN_TEST == 'false' }} 
         run: |
           echo "Boolean is false"
