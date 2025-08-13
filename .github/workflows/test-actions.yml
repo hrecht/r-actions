@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       STRING_TEST: ${{ steps.rscript.outputs.STRING_TEST}}
-      BOOLEAN_TEST: ${{ steps.pass_data.outputs.BOOLEAN_TEST}}
-      NUMERIC_TEST: ${{ steps.pass_data.outputs.NUMERIC_TEST}}
+      BOOLEAN_TEST: ${{ steps.rscript.outputs.BOOLEAN_TEST}}
+      NUMERIC_TEST: ${{ steps.rscript.outputs.NUMERIC_TEST}}
     steps:
       - uses: actions/checkout@v4
     
@@ -29,17 +29,10 @@ jobs:
           echo Boolean: $BOOLEAN_TEST
           echo Numeric: $NUMERIC_TEST
           echo Date: $DATE_TEST
-          echo ${{github.repository}}
   
       - name: Do math with variables
         run: |
           echo Adding numbers: $(($NUMERIC_TEST + $NUMERIC_TEST + 9))
-          
-      - name: Pass data to output for use in following jobs
-        id: pass_data
-        run: |
-          echo "BOOLEAN_TEST=$BOOLEAN_TEST" >> $GITHUB_OUTPUT
-          echo "NUMERIC_TEST=5" >> $GITHUB_OUTPUT
 
       - name: Test boolean false
         if: ${{ env.BOOLEAN_TEST == false }} 
