@@ -11,3 +11,4 @@ send_env <- function(var_name, var_value) {
 send_env("TEXT_TEST", "Hello world")
 send_env("BOOLEAN_TEST", TRUE)
 send_env("NUMERIC_TEST", 2)
+send_env("DATE_TEST", Sys.Date())
