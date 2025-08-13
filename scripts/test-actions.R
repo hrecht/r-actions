@@ -36,7 +36,7 @@ send_env <- function(var_name,
 }
 
 send_env("STRING_TEST", "Hello world", send_output = TRUE)
-send_env("BOOLEAN_TEST", FALSE, send_output = TRUE)
+send_env("BOOLEAN_TEST", FALSE, convert_boolean = FALSE, send_output = TRUE)
 send_env("NUMERIC_TEST", 5, send_output = TRUE)
 send_env("DATE_TEST", Sys.time())
 send_env("ARB_TEST", var_value = nrow(mtcars))
