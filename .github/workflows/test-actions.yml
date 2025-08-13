@@ -7,7 +7,7 @@ jobs:
   test_data:
     runs-on: ubuntu-latest
     outputs:
-      TEXT_TEST: ${{ steps.pass_data.outputs.TEXT_TEST}}
+      STRING_TEST: ${{ steps.rscript.outputs.STRING_TEST}}
       BOOLEAN_TEST: ${{ steps.pass_data.outputs.BOOLEAN_TEST}}
       NUMERIC_TEST: ${{ steps.pass_data.outputs.NUMERIC_TEST}}
     steps:
@@ -18,13 +18,14 @@ jobs:
 
       # Run R script to grab metadata and compare against saved .csv
       - name: Run test-actions.R
+        id: rscript
         run: |
           Rscript scripts/test-actions.R
 
       - name: Print variables
         id: print_vars
         run: |
-          echo "Text: ${{env.TEXT_TEST}}"
+          echo "String: ${{env.STRING_TEST}}"
           echo "Boolean: ${{env.BOOLEAN_TEST}}"
           echo "Numeric: ${{env.NUMERIC_TEST}}"
           echo "Date: ${{env.DATE_TEST}}"
@@ -37,14 +38,18 @@ jobs:
       - name: Pass data to output for use in following jobs
         id: pass_data
         run: |
-          echo "TEXT_TEST=${{env.TEXT_TEST}}" >> $GITHUB_OUTPUT
           echo "BOOLEAN_TEST=${{env.BOOLEAN_TEST}}" >> $GITHUB_OUTPUT
           echo "NUMERIC_TEST=${{env.NUMERIC_TEST}}" >> $GITHUB_OUTPUT
 
-      - name: Test conditionals
+      - name: Test boolean true
         if: ${{ env.BOOLEAN_TEST == true }} 
         run: |
           echo "Boolean is true"
+          
+      - name: Test boolean false
+        if: ${{ env.BOOLEAN_TEST == false }} 
+        run: |
+          echo "Boolean is false"
 
       - name: Test numeric conditional
         if: ${{ env.NUMERIC_TEST > 1 }} 
@@ -63,6 +68,6 @@ jobs:
     steps:
         - name: Echo passed vars
           run: |
-            echo "Repeating text: ${{ needs.test_data.outputs.TEXT_TEST }}"
+            echo "Repeating string: ${{ needs.test_data.outputs.STRING_TEST }}"
             echo "Repeating boolean: ${{ needs.test_data.outputs.BOOLEAN_TEST }}"
             echo "Repeating numeric: ${{ needs.test_data.outputs.NUMERIC_TEST }}"
