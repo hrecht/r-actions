@@ -24,7 +24,7 @@ send_env("BOOLEAN_TEST", FALSE, send_output = TRUE)
 send_env("NUMERIC_TEST", 5, send_output = TRUE)
 send_env("DATE_TEST", Sys.time())
 send_env("ARB_TEST", nrow(mtcars))
-send_env("LIST_TEST", var_value = '["foo", "bar"]')
+send_env(c("LIST_TEST", "LIST_TEST2"), var_value = c("foo", 3))
 
 # Try getting from the env
 repo <- Sys.getenv("github.repository")

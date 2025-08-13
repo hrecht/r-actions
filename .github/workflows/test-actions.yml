@@ -35,35 +35,26 @@ jobs:
         run: |
           echo "Arbitrary test:" $ARB_TEST
           echo "List test:" $LIST_TEST
+          echo "List test2:" $LIST_TEST2
 
       - name: Do math with variables
         run: |
           echo "Adding numbers:" $((NUMERIC_TEST + NUMERIC_TEST + 9))
           
-      - name: Test boolean FALSE string
-        if: ${{ env.BOOLEAN_TEST == 'FALSE' }} 
+      - name: Test boolean true string
+        if: ${{ env.BOOLEAN_TEST == 'true' }} 
         run: |
-          echo "Boolean is FALSE string"
+          echo "Boolean is true
           
       - name: Test boolean false string
         if: ${{ env.BOOLEAN_TEST == 'false' }} 
         run: |
-          echo "Boolean is false string"
+          echo "Boolean is false
           
       - name: Test boolean hello string
         if: ${{ env.BOOLEAN_TEST == 'Hello' }} 
         run: |
           echo "Boolean is Hello
-
-      - name: Test numeric conditional less than
-        if: ${{ env.NUMERIC_TEST < 10 }} 
-        run: |
-          echo "Numeric is < 10"
-          
-      - name: Test numeric conditional greater than
-        if: ${{ env.NUMERIC_TEST > 10 }} 
-        run: |
-          echo "Numeric is > 10"
 
   # Echo data
   repeat_data:
