@@ -32,6 +32,7 @@ jobs:
       - name: Do math with variables
         run: |
           echo "Adding numbers:" $((${{env.NUMERIC_TEST}} + ${{env.NUMERIC_TEST}} + 9))
+          echo "Adding vars:" $((${{env.NUMERIC_TEST}} + ${{env.BOOLEAN_TEST}}))
           
       - name: Pass data to output for use in following jobs
         id: pass_data
@@ -41,14 +42,19 @@ jobs:
           echo "NUMERIC_TEST=${{env.NUMERIC_TEST}}" >> $GITHUB_OUTPUT
 
       - name: Test conditionals
-        if: ${{ env.BOOLEAN_TEST == 'TRUE' }} 
+        if: ${{ env.BOOLEAN_TEST == true }} 
         run: |
-          echo "Boolean is TRUE"
+          echo "Boolean is true"
 
       - name: Test numeric conditional
         if: ${{ env.NUMERIC_TEST > 1 }} 
         run: |
           echo "Numeric is > 1"
+          
+      - name: Test numeric conditional 2
+        if: ${{ env.NUMERIC_TEST > 10 }} 
+        run: |
+          echo "Numeric is > 10"
 
   # Echo data
   repeat_data:
