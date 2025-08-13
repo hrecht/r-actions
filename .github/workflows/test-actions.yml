@@ -34,7 +34,7 @@ jobs:
       - name: Print complex variables
         run: |
           echo "Arbitrary test:" $ARB_TEST
-          echo "List test + fromJSON:" ${{ fromJSON(env.LIST_TEST) }}
+          echo "List test:" $LIST_TEST
           
       - name: Set multiline variable
         run: |
