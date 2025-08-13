@@ -29,18 +29,18 @@ jobs:
           echo Boolean: $BOOLEAN_TEST
           echo Numeric: $NUMERIC_TEST
           echo Date: $DATE_TEST
-          echo github.repository
-
+          echo ${{github.repository}}
+  
       - name: Do math with variables
         run: |
           echo Adding numbers: $(($NUMERIC_TEST + $NUMERIC_TEST + 9))
-          echo Adding vars: $((${{env.NUMERIC_TEST}} + ${{env.BOOLEAN_TEST}}))
+          echo Adding vars: $(($NUMERIC_TEST + $BOOLEAN_TEST))
           
       - name: Pass data to output for use in following jobs
         id: pass_data
         run: |
           echo "BOOLEAN_TEST=$BOOLEAN_TEST" >> $GITHUB_OUTPUT
-          echo "NUMERIC_TEST=${{env.NUMERIC_TEST}}" >> $GITHUB_OUTPUT
+          echo "NUMERIC_TEST=$NUMERIC_TEST" >> $GITHUB_OUTPUT
 
       - name: Test boolean true
         if: ${{ env.BOOLEAN_TEST == true }} 
@@ -51,6 +51,11 @@ jobs:
         if: ${{ env.BOOLEAN_TEST == 'true' }} 
         run: |
           echo "Boolean is true string"
+          
+      - name: Test boolean false string
+        if: ${{ env.BOOLEAN_TEST == 'false' }} 
+        run: |
+          echo "Boolean is false string"
 
       - name: Test numeric conditional less than
         if: ${{ env.NUMERIC_TEST < 10 }} 
