@@ -34,12 +34,11 @@ repo <- Sys.getenv("github.repository")
 print(repo)
 
 system(
-'echo
-MULTI_TEST=$(cat << EOF
-						 Line 1
-						 Line 2
-						 Line 3
-						 EOF
+'echo MULTI_TEST=$(cat << EOF
+Line 1
+Line 2
+Line 3
+EOF
 )')
 system('echo "MULTI_TEST<<EOF" >> "$GITHUB_ENV"')
 system('echo "$MULTI_TEST" >> "$GITHUB_ENV"')
